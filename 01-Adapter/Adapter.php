@@ -32,17 +32,16 @@ class logToConsole {
 }
 
 // 实例化错误类和输出类，并输出错误到控制台
+
 $error = new errorObject('404:Not Found');
 $logToConsole = new logToConsole($error);
 $logToConsole->write();
 
 
-// 现在有一个新的输出错误类。这个新的类把错误记录到一个多列的 CSV 文件，并要求文件内容格式为第 1 列是错误代码，第 2 列是错误文本。
+// 现在有一个新的输出错误类。这个新的类把错误记录到一个多列的 CSV 文件，并要求文件内容格式为第 1 列是错误代码，第 
+// 2 列是错误文本。
 // 然而它用了另外一个版本的 errorObjet，这个 errorObject 有两个接口：getErrorNumber 和 getErrorText
 
-/**
- * 新的输出错误类
- */
 class logToCSV {
 
 	const CSV_LOCATION = './log.csv';
@@ -63,11 +62,9 @@ class logToCSV {
 // 1. 直接修改 errorObject，增加接口（但为了保留原有接口的标准性和公用性，不建议）
 // 2. 创建一个 Adapter 对象（适配器）
 //    (1) 适配器继承 errorOjbect，保留父类原有的特性
-//    (2) 适配器利用原有接口 getError 来获取错误信息，以此封装两个新的接口 getErrorNumber 和 getErrorText
+//    (2) 适配器利用原有接口 getError 来获取错误信息，以此封装两个新的接口 getErrorNumber 和 
+//        getErrorText
 
-/**
- * 适配器
- */
 class logToCSVAdapter extends errorObject {
 
 	private $__errorNumber;
