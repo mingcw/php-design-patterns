@@ -52,7 +52,7 @@ $playlist = new Playlist();
 $playlist->addSong('/home/aaron/music/brr3.mp3', 'Brr');
 $playlist->addSong('/home/aaron/music/googbye.mp3', 'Goodbye');
 
-if ($externalRerievedType == 'pls') {
+if ($externalRerievedType == 'pls') { // 注意这里 $externalRerievedType 是你的项目里得到的
 	$playlistContent = $playlist->getPLS();
 }
 else {
