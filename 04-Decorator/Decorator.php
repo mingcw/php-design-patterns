@@ -19,7 +19,7 @@ class CD {
 	public function getTrackList() {
 		$output = '';
 
-		foreach ($output as $num => $track) {
+		foreach ($this->trackList as $num => $track) {
 			$output .= ($num + 1) . ") {$track}. ";
 		}
 
