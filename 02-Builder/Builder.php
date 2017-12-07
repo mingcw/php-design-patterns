@@ -55,7 +55,7 @@ class productBuilder {
 	public function build() {
 		$this->_product->setType($this->_configs['type']);
 		$this->_product->setSize($this->_configs['size']);
-		$this->_product->setColor($this->_config['color']);
+		$this->_product->setColor($this->_configs['color']);
 	}
 
 	public function getProduct() {
