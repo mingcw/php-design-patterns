@@ -24,7 +24,7 @@ abstract class baseDAO {
 			$key = $this->_primaryKey; // 主键属性由子类定义
 		}
 
-		$sql = "select * from {$this->tableName} where {$key} = '{$value}'"; //　表名属性由子类定义
+		$sql = "select * from {$this->_tableName} where {$key} = '{$value}'"; //　表名属性由子类定义
 		$results = mysql_query($sql, $this->__connection);
 		$rows = array();
 		while($result = mysql_fetch_assoc($results)) {
@@ -35,7 +35,7 @@ abstract class baseDAO {
 	}
 
 	public function update($keyedArray) {
-		$sql = "update {$this->_tablename} set ";
+		$sql = "update {$this->_tableName} set ";
 		foreach ($keyedArray as $column => $value) {
 			$sql .= $column . '=' . $value . ',';
 		}
@@ -62,7 +62,7 @@ abstract class baseDAO {
 
 class userDAO extends baseDAO {
 
-	protected $_tablename = 'user';
+	protected $_tableName = 'user';
 	protected $_primaryKey = 'id'; // 父类中会使用这两个属性，不能设为 private
 
 	public function getUserByFirstName($name) {
