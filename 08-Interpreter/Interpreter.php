@@ -63,7 +63,7 @@ class userCDInterpreter {
 	public function getInterpreted() {
 		$profile = $this->_user->getProfilePage();
 
-		if(preg_match_all('/\{\{myCD\.(.*?)\}\}/', $profile, $trigers, $triggers, PREG_SET_ORDER)) {
+		if(preg_match_all('/\{\{myCD\.(.*?)\}\}/', $profile, $triggers, PREG_SET_ORDER)) {
 			
 			foreach ($triggers as $trigger) {
 				$methods[] = $trigger[1];
