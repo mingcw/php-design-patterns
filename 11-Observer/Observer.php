@@ -23,7 +23,7 @@ class CD {
 
 	public function notifyObserver($type) {
 		if (isset($this->_observers[$type])) {
-			foreach ($this->_observers as $observer) {
+			foreach ($this->_observers[$type] as $observer) {
 				$observer->update($this);
 			}
 		}
@@ -83,8 +83,9 @@ class activityStream {
 $title = 'Waste of a Rib';
 $band  = 'Never Again';
 $cd = new CD($title, $band);
+
 $observer = new buyCDNotifyStreamObserver();
-$cd->attachObserver($observer);
+$cd->attachObserver('purchased', $observer);
 
 $cd->buy();
 
