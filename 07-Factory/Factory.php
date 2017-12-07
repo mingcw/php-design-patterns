@@ -38,7 +38,7 @@ $tracksFromExternalSource = array('What It Means', 'Brr', 'Goodbye');
 $cd = new CD();
 $cd->setTitle($title);
 $cd->setBand($band);
-foreach ($trackFromExternalSource as $track) {
+foreach ($tracksFromExternalSource as $track) {
 	$cd->addTrack($track);
 }
 
@@ -65,7 +65,7 @@ class enhancedCD {
 	}
 
 	public function addTrack($track) {
-		$this->tracks[] = $tracks;
+		$this->tracks[] = $track;
 	}
 }
 
@@ -81,7 +81,7 @@ class CDFactory {
 	public static function create($type) {
 		$class = $type.'CD';
 
-		return new $class;
+		return new $class($type);
 	}
 }
 
@@ -92,7 +92,7 @@ $type = 'enhanced';
 $cd = CDFactory::create($type);
 $cd->setTitle($title);
 $cd->setBand($band);
-foreach ($trackFromExternalSource as $track) {
+foreach ($tracksFromExternalSource as $track) {
 	$cd->addTrack($track);
 }
 
