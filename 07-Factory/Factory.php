@@ -6,25 +6,29 @@
 
 // 下面是一个简单的 CD 类。它包含了添加标题、乐队和曲目列表的方法。
 
-class CD {
-
+class CD
+{
 	public $title  = '';
 	public $band   = '';
 	public $tracks = array();
 
-	public function __construct() {
+	public function __construct()
+	{
 
 	}
 
-	public function setTitle($title) {
+	public function setTitle($title)
+	{
 		$this->title = $title;
 	}
 
-	public function setBand($band) {
+	public function setBand($band)
+	{
 		$this->band = $band;
 	}
 
-	public function addTrack($track) {
+	public function addTrack($track)
+	{
 		$this->tracks[] = $track;
 	}
 }
@@ -46,25 +50,29 @@ foreach ($tracksFromExternalSource as $track) {
 // 为增强型 CD —— 写入光盘的第一个音轨是数据音轨。管理控制软件通过其标签 DATA TRACK 来识别数据音轨，并创建相应
 // 的 CD 对象。
 
-class enhancedCD {
-
+class enhancedCD
+{
 	public $title  = '';
 	public $band   = '';
 	public $tracks = array();
 
-	public function __construct($type) {
+	public function __construct($type)
+	{
 		$this->tracks[] = 'DATA TRACK';
 	}
 
-	public function setTitle($title) {
+	public function setTitle($title)
+	{
 		$this->title = $title;
 	}
 
-	public function setBand($band) {
+	public function setBand($band)
+	{
 		$this->band = $band;
 	}
 
-	public function addTrack($track) {
+	public function addTrack($track)
+	{
 		$this->tracks[] = $track;
 	}
 }
@@ -76,9 +84,10 @@ class enhancedCD {
 // CDFactory 类使用了 PHP 根据变量动态实例化一个类的能力。create 方法接受一个被请求类的类型，并返回该类的一个
 // 实例。
 
-class CDFactory {
-
-	public static function create($type) {
+class CDFactory
+{
+	public static function create($type)
+	{
 		$class = $type.'CD';
 
 		return new $class($type);
