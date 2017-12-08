@@ -6,13 +6,14 @@
 
 // 下面是一个 CD 类的简单示例：
 
-class CD {
-
+class CD
+{
 	public $title  = '';
 	public $band   = '';
 	public $tracks = array();
 
-	public function __construct($title, $band, $tracks) {
+	public function __construct($title, $band, $tracks)
+	{
 		$this->title  = $title;
 		$this->band   = $band;
 		$this->tracks = $tracks;
@@ -35,18 +36,21 @@ $cd = new CD($title, $band, $trackFromExternalSource);
 
 class CDUpperCase {
 
-	public static function makeString(CD $cd, $type) {
+	public static function makeString(CD $cd, $type)
+	{
 		$cd->$type = strtoupper($cd->$type);
 	}
 
-	public static function makeArray(CD $cd, $type) {
+	public static function makeArray(CD $cd, $type)
+	{
 		$cd->$type = array_map('strtoupper', $cd->$type);
 	}
 }
 
-class CDMakeXML {
-
-	public static function create(CD $cd) {
+class CDMakeXML
+{
+	public static function create(CD $cd)
+	{
 		$doc = new DOMDocument();
 
 		$root = $doc->createElement('CD');
@@ -87,10 +91,10 @@ print CDMakeXML::create($cd);
 
 // 这样的确解决了问题，但并不是最佳的做法。如下所示，我们应当针对具体的 Web 服务调用创建一个 Facade 对象。
 
-class WebServiceFacade {
-
-	public static function makeXMLCall(CD $cd) {
-
+class WebServiceFacade
+{
+	public static function makeXMLCall(CD $cd)
+	{
 		CDUpperCase::makeString($cd, 'title');
 		CDUpperCase::makeString($cd, 'band');
 		CDUpperCase::makeArray($cd, 'tracks');
