@@ -6,12 +6,13 @@
 
 // 如下，CD 对象具有一个接受乐队变化以及在数据库中进行更新的方法：
 
-class CD {
-
+class CD
+{
 	public $band  = '';
 	public $title = '';
 
-	public function save() {
+	public function save()
+	{
 		// 根据当前对象属性，更新数据库
 		// ...
 		// ...
@@ -20,7 +21,8 @@ class CD {
 		var_dump($this);		
 	}
 
-	public function changeBandName($newName) {
+	public function changeBandName($newName)
+	{
 		$this->band = $newName;
 		$this->save();
 	}
@@ -34,17 +36,19 @@ class CD {
 
 // 现在应当使用在中介者设计模式。首先，为了使用该模式，必须修改 CD 类。随后，创建与 CD 类类似的 MP3 归档类。
 
-class CD {
-
+class CD
+{
 	public $band  = '';
 	public $title = '';
 	protected $_mediator;     // 保存中介对象的引用
 
-	public function __construct($mediator = null) {
+	public function __construct($mediator = null)
+	{
 		$this->_mediator = $mediator;
 	}
 
-	public function save() {
+	public function save()
+	{
 		// 根据当前对象属性，更新数据库
 		// ...
 		// ...
@@ -53,7 +57,8 @@ class CD {
 		var_dump($this);
 	}
 
-	public function changeBandName($newName) {
+	public function changeBandName($newName)
+	{
 		if (!is_null($this->_mediator)) { // 通知中介者更新所有对象
 			$this->_mediator->change($this, array('band' => $newName));
 		}
@@ -62,17 +67,19 @@ class CD {
 	}
 }
 
-class MP3Archive {
-
+class MP3Archive
+{
 	public $band  = '';
 	public $title = '';
 	protected $_mediator;     // 保存中介对象的引用
 
-	public function __construct($mediator) {
+	public function __construct($mediator)
+	{
 		$this->_mediator = $mediator;
 	}
 
-	public function save() {
+	public function save()
+	{
 		// 根据当前对象属性，更新数据库
 		// ...
 		// ...
@@ -81,7 +88,8 @@ class MP3Archive {
 		var_dump($this);
 	}
 
-	public function changeBandName($newName) {
+	public function changeBandName($newName)
+	{
 		if (!is_null($this->_mediator)) { // 通知中介者更新所有对象
 			$this->_mediator->change($this, array('band' => $newName));
 		}
@@ -102,16 +110,18 @@ class MP3Archive {
 
 // 如下所示，随后需要创建中介者类：
 
-class MusicContainerMediator {
-
+class MusicContainerMediator
+{
 	protected $_containers = array();
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->_containers[] = 'CD';
 		$this->_containers[] = 'MP3Archive';
 	}
 
-	public function change($originalObject, $newValue) {
+	public function change($originalObject, $newValue)
+	{
 		$title = $originalObject->title;
 		$band  = $originalObject->band;
 
