@@ -3,30 +3,34 @@
 
 // 有一个错误类，用来存储错误信息，并对外提供一个获取错误的接口 getError 
 
-class errorObject {
-
+class errorObject
+{
 	private $__error;
 
-	public function __construct($error) {
+	public function __construct($error)
+	{
 		$this->__error = $error;
 	}
 
-	public function getError() {
+	public function getError()
+	{
 		return $this->__error;
 	}
 }
 
 // 输出错误类，直接把错误输出到控制台
 
-class logToConsole {
-
+class logToConsole
+{
 	private $__errorObject;
 
-	public function __construct($errorObject) {
+	public function __construct($errorObject)
+	{
 		$this->__errorObject = $errorObject;
 	}
 
-	public function write() {
+	public function write()
+	{
 		fprintf(STDERR, $this->__errorObject->getError());;
 	}
 }
@@ -42,17 +46,19 @@ $logToConsole->write();
 // 2 列是错误文本。
 // 然而它用了另外一个版本的 errorObjet，这个 errorObject 有两个接口：getErrorNumber 和 getErrorText
 
-class logToCSV {
-
+class logToCSV
+{
 	const CSV_LOCATION = './log.csv';
 
 	private $__errorObject;
 
-	public function __construct($errorObject) {
+	public function __construct($errorObject)
+	{
 		$this->__errorObject = $errorObject;
 	}
 
-	public function write() {
+	public function write()
+	{
 		$line  = $this->__errorObject->getErrorNumber() . ':' . $this->__errorObject->getErrorText() . "\n";
 		file_put_contents(self::CSV_LOCATION, $line, FILE_APPEND);
 	}
@@ -65,23 +71,26 @@ class logToCSV {
 //    (2) 适配器利用原有接口 getError 来获取错误信息，以此封装两个新的接口 getErrorNumber 和 
 //        getErrorText
 
-class logToCSVAdapter extends errorObject {
-
+class logToCSVAdapter extends errorObject
+{
 	private $__errorNumber;
 	private $__errorText;
 
-	public function __construct($error) {
+	public function __construct($error)
+	{
 		parent::__construct($error);
 		$line = explode(':', $this->getError());
 		$this->__errorNumber = $line[0];
 		$this->__errorText = $line[1];
 	}
 
-	public function getErrorNumber() {
+	public function getErrorNumber()
+	{
 		return $this->__errorNumber;
 	}
 
-	public function getErrorText() {
+	public function getErrorText()
+	{
 		return $this->__errorText;
 	}
 }
