@@ -6,20 +6,23 @@
 
 // 这里需要 2 个类（父-子类）。第一个类应当是基本数据访问对象类，它具有获取和更新数据的方法。如下所示：
 
-abstract class baseDAO {
-
+abstract class baseDAO
+{
 	private $__connection; // 存储数据库连接
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->__connectToDB(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
 	}
 
-	private function __connectToDB($host, $user, $pass, $database) {
+	private function __connectToDB($host, $user, $pass, $database)
+	{
 		$this->__connection = mysql_connect($host, $user, $pass);
 		mysql_select_db($database, $this->__connection);
 	}
 
-	public function fetch($value, $key = NULL) {
+	public function fetch($value, $key = NULL)
+	{
 		if(is_null($key)) {
 			$key = $this->_primaryKey; // 主键属性由子类定义
 		}
@@ -34,7 +37,8 @@ abstract class baseDAO {
 		return $rows;
 	}
 
-	public function update($keyedArray) {
+	public function update($keyedArray)
+	{
 		$sql = "update {$this->_tableName} set ";
 		foreach ($keyedArray as $column => $value) {
 			$sql .= $column . '=' . $value . ',';
@@ -60,12 +64,13 @@ abstract class baseDAO {
 // 任何子类都可以扩展这个抽象类。通过指向　user 表，下面的子类能够引用到用户实体。只需要在用户实体具体环境中添
 // 加有意义的特定功能性。
 
-class userDAO extends baseDAO {
-
+class userDAO extends baseDAO
+{
 	protected $_tableName = 'user';
-	protected $_primaryKey = 'id'; // 父类中会使用这两个属性，不能设为 private
+	protected $_primaryKey = 'id';     // 父类中会使用这两个属性，不能设为 private
 
-	public function getUserByFirstName($name) {
+	public function getUserByFirstName($name)
+	{
 		$result = $this->fetch($name, 'firstName'); // 按照 firstName 字段查找
 		return $result;
 	}
