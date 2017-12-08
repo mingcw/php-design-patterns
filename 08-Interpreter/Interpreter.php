@@ -7,15 +7,17 @@
 // 在第一次迭代中，用户可以创建自己的配置文件，并且能够在配置文件中添加自己喜欢的 CD 标题，第一部分功能性是 
 // User 类：
 
-class User {
-
+class User
+{
 	protected $_username = '';
 
-	public function __construct($username) {
+	public function __construct($username)
+	{
 		$this->_username = $username;
 	}
 
-	public function getProfilePage() {
+	public function getProfilePage()
+	{
 		// 替代了一波数据库操作，这里提供一段演示信息～
 		$profile  = '<h2>I like Never Again</h2>';
 		$profile .= 'I love all of their songs. My favourite CD: <br />';
@@ -32,16 +34,20 @@ class User {
 
 // 为了为用户检索 CD 信息，需要创建一个名为 UserCD 的类：
 
-class userCD {
-
+class userCD
+{
 	protected $_user = NULL;
 
-	public function setUser($user) {
+	public function setUser($user)
+	{
 		$this->_user = $user;
 	}
 
-	public function getTitle() {
-		// 草率地提供一段演示信息～
+	public function getTitle()
+	{
+		// 一段演示信息～
+		// ...
+		// ...
 		$title = 'Waste of a Rib';
 
 		return $title;
@@ -52,15 +58,17 @@ class userCD {
 // 注意到 getTitle() 方法的名称和用户配置文件中指定的模板语言之间的相似性，这是十分重要的。如下所示，解释器类
 // 使用了这种相似性：
 
-class userCDInterpreter {
-
+class userCDInterpreter
+{
 	protected $_user = NULL;
 
-	public function setUser($user) {
+	public function setUser($user)
+	{
 		$this->_user = $user;
 	}
 
-	public function getInterpreted() {
+	public function getInterpreted()
+	{
 		$profile = $this->_user->getProfilePage();
 
 		if(preg_match_all('/\{\{myCD\.(.*?)\}\}/', $profile, $triggers, PREG_SET_ORDER)) {
