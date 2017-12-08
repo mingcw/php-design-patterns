@@ -6,18 +6,20 @@
 
 // 首先，半标准 CD 类如下所示：
 
-class CD {
-
+class CD
+{
 	public $band      = '';
 	public $title     = '';
 	public $trackList = array();
 
-	public function __construct($band, $title) {
+	public function __construct($band, $title)
+	{
 		$this->band  = $band;
 		$this->title = $title;
 	}
 
-	public function addTrack($track) {
+	public function addTrack($track)
+	{
 		$this->trackList[] = $track;
 	}
 }
@@ -28,12 +30,13 @@ class CD {
 // 下面创建的是迭代器类。这个示例实现了 SPL 迭代器。因此，我们要求其具有 current()、key()、rewind()、next()
 // 和 valid() 公共方法（PHP Iterator 接口手册：http://php.net/manual/zh/class.iterator.php）。
 
-class CDSearchByBandIterator implements Iterator {
-
+class CDSearchByBandIterator implements Iterator
+{
 	private $__CDs   = array();
 	private $__valid = FALSE;
 
-	public function __construct($bandName) {
+	public function __construct($bandName)
+	{
 		$db = mysql_connect('localhost', 'root', 'root');
 		mysql_select_db('test');
 
@@ -52,23 +55,28 @@ class CDSearchByBandIterator implements Iterator {
 		}
 	}
 
-	public function rewind() {
+	public function rewind()
+	{
 		$this->__valid = (rewind($this->__CDs) === FALSE) ? FALSE : TRUE;
 	}
 
-	public function next() {
+	public function next()
+	{
 		$this->__valid = (next($this->__CDs) === FALSE) ? FALSE : TRUE;
 	}
 
-	public function valid() {
+	public function valid()
+	{
 		return $this->__valid;
 	}
 
-	public function current() {
+	public function current()
+	{
 		return current($this->__CDs);
 	}
 
-	public function key() {
+	public function key()
+	{
 		return key($this->__CDs);
 	}
 }
