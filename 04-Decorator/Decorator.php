@@ -4,19 +4,22 @@
 // 示例中，应用程序对光盘（Compact Disc，CD）进行处理。应用程序必须具有为 CD 添加音轨的方法以及显示 CD 音轨列
 // 表的方式。客户指定了应当采用单行并且每个音轨都必须以音轨号为前缀的方式显示 CD 音轨列表。
 
-class CD {
-
+class CD
+{
 	public $trackList;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->trackList = array();
 	}
 
-	public function addTrack($track) {
+	public function addTrack($track)
+	{
 		$this->trackList[] = $track;
 	}
 
-	public function getTrackList() {
+	public function getTrackList()
+	{
 		$output = '';
 
 		foreach ($this->trackList as $num => $track) {
@@ -47,15 +50,17 @@ echo 'The CD contains the following tracks: ' . $myCD->getTrackList();
 // 需要采用大写形式。对于这种小变化而言，最佳的做法并非修改基类或创建父-子关系，而是创建一个基于装饰器设计模式的
 // 对象。
 
-class CDTrackListDecoratorCaps {
-
+class CDTrackListDecoratorCaps
+{
 	private $__cd;
 
-	public function __construct(CD $cd) {
+	public function __construct(CD $cd)
+	{
 		$this->__cd = $cd;
 	}
 
-	public function makeCaps() {
+	public function makeCaps()
+	{
 		foreach ($this->__cd->trackList as $track) {
 			$track = strtoupper($track);
 		}
