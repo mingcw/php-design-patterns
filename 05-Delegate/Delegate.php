@@ -3,20 +3,23 @@
 
 // Web 站点具有创建 MP3 文件播放列表的功能。下面的示例显示了播放列表的创建部分
 
-class Playlist {
-
+class Playlist
+{
 	private $__songs;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->__songs = array();
 	}
 
-	public function addSong($location, $title) {
+	public function addSong($location, $title)
+	{
 		$song = array('location' => $location, 'title' => $title);
 		$this->__songs[] = $song;
 	} 
 
-	public function getM3U() {
+	public function getM3U()
+	{
 		$m3u = "#EXTM3U\n\n";
 
 		foreach ($this->__songs as $song) {
@@ -27,7 +30,8 @@ class Playlist {
 		return $m3u;
 	}
 
-	public function getPLS() {
+	public function getPLS()
+	{
 		$pls = "[playlist]\nNumberOfEntries = ".count($this->__songs)."\n\n";
 
 		foreach ($this->__songs as $songCount => $song) {
@@ -68,23 +72,26 @@ else {
 
 // 为了使用委托设计模式，需要设计新的 Playlist 类：
 
-class newPlaylist {
-
+class newPlaylist
+{
 	private $__songs;
 	private $__typeObject;
 
-	public function __construct($type) {
+	public function __construct($type)
+	{
 		$this->__songs = array();
 		$object = "{$type}Playlist";
 		$this->__typeObject = new $object; // 利用了 PHP 基于某个变量动态创建类的特性
 	}
 
-	public function addSong($location, $title) {
+	public function addSong($location, $title)
+	{
 		$song = array('location' => $location, 'title' => $title);
 		$this->__songs[] = $song;
 	}
 
-	public function getPlaylist() {
+	public function getPlaylist()
+	{
 		$playlist = $this->__typeObject->getPlaylist($this->__songs);
 		return $playlist;
 	}
@@ -99,9 +106,10 @@ class newPlaylist {
 
 // 如下所示，原有 Playlist 对象的上述 2 个方法被移到这些对象自己的委托对象中：
 
-class m3uPlaylistDelegate {
-
-	public function getPlaylist($songs) {
+class m3uPlaylistDelegate
+{
+	public function getPlaylist($songs)
+	{
 		$m3u = "#EXTM3U\n\n";
 
 		foreach ($songs as $song) {
@@ -113,9 +121,10 @@ class m3uPlaylistDelegate {
 	}
 }
 
-class plsPlaylistDelegate {
-
-	public function getPlaylist($songs) {
+class plsPlaylistDelegate
+{
+	public function getPlaylist($songs)
+	{
 		$pls = "[playlist]\nNumberOfEntries = ".count($songs)."\n\n";
 
 		foreach ($songs as $songCount => $song) {
