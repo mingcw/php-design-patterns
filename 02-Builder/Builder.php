@@ -6,21 +6,24 @@
 
 // 如上所述，最早版本的产品对象创建方法被设计为先创建一个初始的产品对象，再依次执行上述 3 个方法。
 
-class product {
-
+class product
+{
 	protected $_type  = '';
 	protected $_size  = '';
 	protected $_color = '';
 
-	public function setType($type) {
+	public function setType($type)
+	{
 		$this->_type = $type;
 	}
 
-	public function setSize($size) {
+	public function setSize($size)
+	{
 		$this->_size = $size;
 	}
 
-	public function setColor($color) {
+	public function setColor($color)
+	{
 		$this->_color = $color;
 	}
 }
@@ -42,23 +45,26 @@ $product->setColor($productConfigs['color']);
 // product 实例。它有一个 build 方法负责调用 product 类中的所有方法，从而构建完整的 product 对象。最后，它
 // 提供了一个 getProduct 方法返回完整构建的 product 对象。
 
-class productBuilder {
-
+class productBuilder
+{
 	protected $_product = NULL;
 	protected $_configs = array();
 
-	public function __construct($configs) {
+	public function __construct($configs)
+	{
 		$this->_product = new product();
 		$this->_configs = $configs;
 	}
 
-	public function build() {
+	public function build()
+	{
 		$this->_product->setType($this->_configs['type']);
 		$this->_product->setSize($this->_configs['size']);
 		$this->_product->setColor($this->_configs['color']);
 	}
 
-	public function getProduct() {
+	public function getProduct()
+	{
 		return $this->_product;
 	}
 }
