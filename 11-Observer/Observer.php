@@ -6,22 +6,25 @@
 
 // 如下所示，将 CD 销售情况置入活动流的第一个步骤是创建一个基于观察者设计模式的 CD 对象：
 
-class CD {
-
+class CD
+{
 	public $title = '';
 	public $band  = '';
 	protected $_observers = array();
 
-	public function __construct($title, $band) {
+	public function __construct($title, $band)
+	{
 		$this->title = $title;
 		$this->band  = $band;
 	}
 
-	public function attachObserver($type, $observer) {
+	public function attachObserver($type, $observer)
+	{
 		$this->_observers[$type][] = $observer;
 	}
 
-	public function notifyObserver($type) {
+	public function notifyObserver($type)
+	{
 		if (isset($this->_observers[$type])) {
 			foreach ($this->_observers[$type] as $observer) {
 				$observer->update($this);
@@ -29,7 +32,8 @@ class CD {
 		}
 	}
 
-	public function buy() {
+	public function buy()
+	{
 		// 这是一系列的购买操作
 		// ...
 		
@@ -48,8 +52,8 @@ class CD {
 
 // 如下所示，随后要求某个观察者向活动流发布购买信息：
 
-class buyCDNotifyStreamObserver {
-
+class buyCDNotifyStreamObserver
+{
 	public function update(CD $cd) {
 		$activity = "The CD named {$cd->title} by {$cd->band} was just purchased.";
 		activityStream::addNewItem($activity);
@@ -61,9 +65,10 @@ class buyCDNotifyStreamObserver {
 
 // 最后详细说明两个问题：activityStream() 类和使用观察者启动 CD 销售的方法。
 
-class activityStream {
-
-	public static function addNewItem($item) {
+class activityStream
+{
+	public static function addNewItem($item)
+	{
 		// 这是一系列操作
 		// ...
 		
